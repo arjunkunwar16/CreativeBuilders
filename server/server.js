@@ -14,13 +14,14 @@ app.use(
 );
 app.use(express.static('public'));
 
-const geminiApiKey = process.env.API_KEY;
+const geminiApiKey ='AIzaSyCBa97RninwHnX8sTPwxSL7a98BNVPTgFg';
 const googleAI = new GoogleGenerativeAI(geminiApiKey);
 const geminiModel = googleAI.getGenerativeModel({ model: 'gemini-pro' });
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
+
 
 app.get('/generate', async (req, res) => {
   let prompt = req.query.prompt;
