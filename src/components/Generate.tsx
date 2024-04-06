@@ -4,8 +4,8 @@ import ReactMarkdown from 'react-markdown';
 
 const Generate = () => {
     const [content, setContent] = useState('');
-    const [prompt, setPrompt] = useState('hi');
-    const [tempPrompt, setTempPrompt] = useState('hi');
+    const [prompt, setPrompt] = useState('Covert it into reality!');
+    const [tempPrompt, setTempPrompt] = useState('Convert it into reality!');
     const [isLoading, setIsLoading] = useState(false); // new state variable for loading status
 
     const handleSubmit = () => {
@@ -27,15 +27,34 @@ const Generate = () => {
     };
 
     return (
-        <div>
-            <h1>Generated Content</h1>
-            {isLoading ? <p>Loading...</p> : <ReactMarkdown>{content}</ReactMarkdown>} {/* display loading text when loading, otherwise display the content */}
-            <input type="text" value={tempPrompt} onChange={e => setTempPrompt(e.target.value)} />
-            <button onClick={handleSubmit}>Submit</button>
-            <br/>
-            <br/>
-            <a href="/">Go to Home</a>
-        </div>
+        <div className="bg-black text-white p-6 rounded-lg shadow-md max-w-md ml-4 mr-auto mt-40">
+  <h1 className="text-3xl font-bold text-red-500 mb-4">Idea?</h1>
+  <br />
+  {isLoading ? (
+    <p className="text-gray-400">Loading...</p>
+  ) : (
+    <ReactMarkdown className="prose prose-red">{content}</ReactMarkdown>
+  )}
+  <input
+    type="text"
+    value={tempPrompt}
+    onChange={e => setTempPrompt(e.target.value)}
+    className="mt-4 bg-gray-800 text-white border-none rounded-md p-2 w-full"
+  />
+  <br />
+  <br />
+  <button
+  onClick={handleSubmit}
+  className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow"
+>
+  Generate
+</button>
+  <br />
+  <br />
+  <a href="/" className="text-red-500 hover:underline">
+    Go to Home
+  </a>
+</div>
     );
 };
 
