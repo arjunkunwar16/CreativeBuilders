@@ -56,8 +56,18 @@ const Generate = () => {
     // Create a plane geometry for the floor
     const floorGeometry = new THREE.PlaneGeometry(gridSize, gridSize, 10, 10);
 
-    // Create a basic material for the floor
-    const floorMaterial = new THREE.MeshBasicMaterial({ color: 0x808080, side: THREE.DoubleSide });
+    // Create a texture loader
+    const textureLoader = new THREE.TextureLoader();
+
+    // Load a texture
+    const floorTexture = textureLoader.load('/texture.jpeg'); // Replace 'path-to-your-image-file' with the path to your image file
+
+    // Create a material using the texture
+    const floorMaterial = new THREE.MeshBasicMaterial({
+      map: floorTexture,
+      side: THREE.DoubleSide,
+      color: 'white',
+    });
 
     // Create a mesh for the floor
     const floor = new THREE.Mesh(floorGeometry, floorMaterial);
@@ -69,12 +79,14 @@ const Generate = () => {
     // Add the floor to the scene
     scene.add(floor);
 
+    // Load a texture for the wall
+    const wallTexture = textureLoader.load('wall.jpg');  // Replace 'path-to-your-wall-image-file' with the path to your image file
 
-    // Create a material using a plane color
-    const wallMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide });
+    // Create a material using the wall texture
+    const wallMaterial = new THREE.MeshBasicMaterial({ map: wallTexture, side: THREE.DoubleSide });
 
     // Create a plane for the x-axis
-    const xAxisPlane = new THREE.Mesh(floorGeometry,wallMaterial );
+    const xAxisPlane = new THREE.Mesh(floorGeometry, wallMaterial);
 
     // Set the position of the x-axis plane to match the grid's position
     xAxisPlane.position.set(gridSize / 2, gridSize / 2, 0);
@@ -93,7 +105,7 @@ const Generate = () => {
 
     // Add the z-axis plane to the scene
     scene.add(zAxisPlane);
-    
+
     function createCube(size, x, y) {
       // Create cube geometry
       const geometry = new THREE.BoxGeometry(size, size, size);
@@ -128,15 +140,14 @@ const Generate = () => {
       scene.add(cuboid);
     }
 
-    
     function createLabel(text, x, y, z) {
       const canvas = document.createElement('canvas');
-      canvas.width = 64; // Increase the size of the canvas
-      canvas.height = 64;
+      canvas.width = 100; // Increase the size of the canvas
+      canvas.height = 100;
       const context = canvas.getContext('2d');
       context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
       context.font = '48px Arial'; // Increase the font size
-      context.fillStyle = 'white'; // Change the text color to white
+      context.fillStyle = 'yellow'; // Change the text color to white
       context.fillText(text, 0, canvas.height / 2); // Draw the text in the middle of the canvas
 
       const texture = new THREE.CanvasTexture(canvas);
@@ -155,17 +166,18 @@ const Generate = () => {
 
     // Make the camera look at the center of the grid
     camera.lookAt(new THREE.Vector3(0, 0, 0));
+    // createCuboid(divisionSize * 2, divisionSize, divisionSize * 3, 1, 1);
 
-    
     // place the cubes at the coordinates given in data
     // Assuming data is an object like {Table: [1, 1], Bed: [5, 5]}
     Object.entries(content).forEach(([objectName, coord]) => {
-        createCube(divisionSize, coord[0], coord[1]);
+      createCube(divisionSize, coord[0], coord[1]);
+      createLabel(objectName, coord[0] * divisionSize, divisionSize, coord[1] * divisionSize);
     });
     const animate = function () {
-        requestAnimationFrame(animate);
-  
-        renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+
+      renderer.render(scene, camera);
     };
 
     animate();
@@ -181,7 +193,6 @@ const Generate = () => {
       .get(`http://localhost:4000/generate?prompt=${tempPrompt}`)
       .then(response => {
         setContent(response.data);
-
       })
       .catch(error => {
         console.error('There was an error!', error);
@@ -190,10 +201,6 @@ const Generate = () => {
         setIsLoading(false);
       });
     setPrompt(tempPrompt);
-
-
-    
-
   };
 
   return (
@@ -201,11 +208,7 @@ const Generate = () => {
       <div className="bg-black text-white p-6 rounded-lg shadow-md w-1/4 h-1/2">
         <h1 className="text-3xl font-bold text-red-500 mb-4">Idea?</h1>
         <br />
-        {isLoading ? (
-          <p className="text-gray-400">Loading...</p>
-        ) : (
-          <p></p>
-        )}
+        {isLoading ? <p className="text-gray-400">Loading...</p> : <p></p>}
         <input
           type="text"
           value={tempPrompt}
