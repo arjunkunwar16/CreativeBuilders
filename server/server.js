@@ -40,7 +40,8 @@ app.get('/generate', async (req, res) => {
   let coordinates = {};
   const objects = ['Chair', 'Table', 'TV', 'Bed'];
 
-  tosend.split(';').forEach(line => {
+  tosend.split(';').forEach(line => { 
+    
     const parts = line.split(':');
     const object = parts[0].trim();
     if (objects.includes(object)) {
