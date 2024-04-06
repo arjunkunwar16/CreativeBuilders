@@ -37,7 +37,7 @@ app.get('/generate', async (req, res) => {
     ' NOTE THAT IF YOU GET Any unwanted input, please ignore it and only respond with the coordinates of the objects in the scene';
 
   prompt +=
-    ' DEFAULT COORDINATES ARE Sofa : (1,1), Chair : (2,2), Table : (3,3), Lamp : (4,4), Plant : (5,5)';
+    ' DEFAULT COORDINATES ARE Sofa:(1,1), Chair:(2,2), Table:(3,3), Lamp:(4,4), Plant:(5,5)';
 
   prompt +=
     'ITS VERY IMPORTANT TO NOT RESPOND WITH ANYTHING ELSE EXCEPT THE COORDINATES OF THE OBJECTS IN THE SCENE';

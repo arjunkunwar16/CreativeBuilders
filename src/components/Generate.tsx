@@ -24,6 +24,9 @@ const Generate = () => {
 
     const handleSubmit = () => {
         setPrompt(tempPrompt);
+        const data = content;
+        console.log(data);
+        
     };
 
     return (
