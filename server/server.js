@@ -22,6 +22,14 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+const test = async () => {
+  const prompt = 'A room with Bed, Chair, Table, TV';
+  const result = await geminiModel.generateContent(prompt);
+  console.log(result.response.text());
+
+}
+test();
+
 app.get('/generate', async (req, res) => { 
   let prompt = 'I will now give you a prompt about description of a room with Bed, Chair, Table, TV, you have to give me coordinates of the same assuming the room to be 5m x 5m. Now you have to give me the coordinates in the form ;Object1:(x1,y1);Object2:(x2,y2);Object3:(x3,y3);Object4:(x4,y4);. For example, if you want to place a Bed at (1,1), chair at (2,2), table at (3,3), TV at (4,4), you will give me the coordinates as ;TV:(1,1);Chair:(2,2);Table:(3,3);TV:(4,4); also keep in mind that the coordinates cant exceed 5 and cant be lesser than 1 as the room is 5mx5m otherwise the system will malfunction, also coordinates should be only integer nothing except it, moreover it is possible that you may not want to place all the objects in the room according to the prompt, in that case you can skip the object. Now let me give you the prompt, make sure to understand each and every word really clearly and then give me the coordinates according to the data given very precisely. Here is the prompt:';
   prompt += req.query.prompt;
@@ -30,7 +38,7 @@ app.get('/generate', async (req, res) => {
 
   // create new coordinates object that map object to coordinate
   let coordinates = {};
-  const objects = ['Sofa', 'Chair', 'Table', 'TV', 'Plant', 'Bed'];
+  const objects = ['Chair', 'Table', 'TV', 'Bed'];
 
   tosend.split(';').forEach(line => {
     const parts = line.split(':');
