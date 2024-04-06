@@ -8,7 +8,7 @@ const Generate = () => {
     const [tempPrompt, setTempPrompt] = useState('hi');
     const [isLoading, setIsLoading] = useState(false); // new state variable for loading status
 
-    useEffect(() => {
+    const handleSubmit = () => {
         setIsLoading(true); // set loading to true at the start of the effect
         axios.get(`http://localhost:4000/generate?prompt=${prompt}`)
             .then(response => {
@@ -19,10 +19,7 @@ const Generate = () => {
             })
             .finally(() => {
                 setIsLoading(false); // set loading to false once the API call has completed
-            });
-    }, [prompt]);
-
-    const handleSubmit = () => {
+        });
         setPrompt(tempPrompt);
         const data = content;
         console.log(data);

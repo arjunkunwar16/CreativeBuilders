@@ -17,7 +17,7 @@ export const Header: React.FC<IHeader> = ({ useMotion, p, h2 }) => {
   const Content = () => (
     <>
       <p className={styles.sectionSubText}>{p}</p>
-      <h2  className="gradient-text" style={{ fontSize: "3em", fontWeight: "bold"}}>{h2}</h2>
+      <h2 className={styles.sectionHeadText} style={{ background: "linear-gradient(to right, red, purple)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", animation: "gradientAnimation 1s infinite" }}>{h2}</h2>
     </>
   );
 

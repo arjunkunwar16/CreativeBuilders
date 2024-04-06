@@ -24,29 +24,29 @@ app.get('/', (req, res) => {
 
 
 app.get('/generate', async (req, res) => {
-  let prompt = req.query.prompt;
-  prompt +=
-    ' I want to make an architecture with these specifications, please give me exact coordinates of the objects required in the scene, also make the coordiantes positive integers, moreover unless mentioned assume the room to me 5m x 4 m note that give me the coordinates ONLY in the form of sofa:(x,y), chair(x,y) and so on note that dont give any other information other than the coordinates of the objects';
-
-  prompt += ' Example is Sofa : (1,1), Chair : (2,2), Table : (3,3), Lamp : (4,4), Plant : (5,5)';
-
-  prompt +=
-    ' Note that the only objects in the scene are Sofa, Chair, Table, Lamp, Plant, Bed NOTHING ELSE, keep in mind NOTHING ELSE ';
-  prompt +=
-    ' PLEASE MAKE SURE THAT YOU DONT GENERATE ANYTHING EXCEPT THE EXAMPLE AS IT WILL CAUSE PROBLEMS';
-  prompt +=
-    ' NOTE THAT IF YOU GET Any unwanted input, please ignore it and only respond with the coordinates of the objects in the scene';
-
-  prompt +=
-    ' DEFAULT COORDINATES ARE Sofa:(1,1), Chair:(2,2), Table:(3,3), Lamp:(4,4), Plant:(5,5)';
-
-  prompt +=
-    'ITS VERY IMPORTANT TO NOT RESPOND WITH ANYTHING ELSE EXCEPT THE COORDINATES OF THE OBJECTS IN THE SCENE';
-  prompt +=
-    'EVEN WHEN THE USER ASKS FOR A DIFFERENT PROMPT, PLEASE RESPOND WITH THE COORDINATES OF THE OBJECTS IN THE SCENE';
+   
+    
+  let prompt = ' there is a prompt which will contain what the user wants in a room,also unless mentioned assume the room to be 5m x 4m dimentions now from that prompt you have to infer the objects and its possible placements in a room into a coordinates . Make all the generic assumntions about the room and the stuff. Only include Sofa, chair, table, Tv, plant and bed nothing else in the response. Example is Sofa : (x1,y1); Chair : (x2,y2); Table : (x3,y3); TV : (x4,y4); Plant : (x5,y5);Bed:(x6, y6) where x1..x6 and y1..y6 are the coordinates of the scene according to the prompt. Also assume that objects are not rotated and they are placed in the same direction as they are in the prompt.  Now the prompt in question is ->> ';
+  prompt += req.query.prompt;
   const result = await geminiModel.generateContent(prompt);
   const tosend = result.response.text();
-  // console.log(tosend);
+
+  // create new coordinates object that map object to coordinate
+  let coordinates = {};
+  const objects = ['Sofa', 'Chair', 'Table', 'TV', 'Plant', 'Bed'];
+
+  tosend.split(';').forEach(line => {
+    const parts = line.split(':');
+    const object = parts[0].trim();
+    if (objects.includes(object)) {
+      const coords = parts[1].trim().replace('(', '').replace(')', '').split(',');
+      const x = parseFloat(coords[0]);
+      const y = parseFloat(coords[1]);
+      coordinates[object] = [x, y];
+    }
+  });
+
+  console.log(coordinates);
   res.send(tosend);
 });
 
