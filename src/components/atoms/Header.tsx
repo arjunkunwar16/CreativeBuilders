@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { styles } from "../../constants/styles";
 import { textVariant } from "../../utils/motion";
 
+
 interface IHeader {
   useMotion: boolean;
   p: string;
@@ -11,10 +12,12 @@ interface IHeader {
 }
 
 export const Header: React.FC<IHeader> = ({ useMotion, p, h2 }) => {
+
+
   const Content = () => (
     <>
       <p className={styles.sectionSubText}>{p}</p>
-      <h2 className={styles.sectionHeadText}>{h2}</h2>
+      <h2 className={styles.sectionHeadText} style={{ background: "linear-gradient(to right, #ff0000, #00ff00, #0000ff)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", animation: "gradientAnimation 1s infinite" }}>{h2}</h2>
     </>
   );
 
