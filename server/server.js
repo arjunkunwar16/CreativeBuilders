@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 app.get('/generate', async (req, res) => {
    
     
-  let prompt = '# Room Designer This prompt helps design a room layout by converting a simple description into coordinates. Predefined objects: TV, Plant, Sofa, Table, Chair, Bed. Please provide your room description. **Important: Follow the examples for proper formatting.** **Examples:** * "TV against the west wall, plant in the southeast corner." * "Sofa facing the TV in the center, table with two chairs to the right."  **Output Format:** ;Object1:(x1, y1);Object2:(x2,y2);... ';
+  let prompt = 'I will now give you a prompt about description of a room with Sofa, Chair, Table, TV, Plant and Bed, you have to give me coordinates of the same assuming the room to be 5m x 4m. Now you have to give me the coordinates in the form ;Object1:(x1,y1);Object2:(x2,y2);Object3:(x3,y3);Object4:(x4,y4);Object5:(x5,y5);Object6:(x6,y6);. For example, if you want to place a sofa at (1,1), chair at (2,2), table at (3,3), TV at (4,4), plant at (5,5) and bed at (6,6), you will give me the coordinates as ;Sofa:(1,1);Chair:(2,2);Table:(3,3);TV:(4,4);Plant:(5,5);Bed:(6,6); moreover it is possible that you may not want to place all the objects in the room, in that case you can skip the object.';
   prompt += req.query.prompt;
   const result = await geminiModel.generateContent(prompt);
   const tosend = result.response.text();
