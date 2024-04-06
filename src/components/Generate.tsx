@@ -7,7 +7,6 @@ const Generate = () => {
     const [prompt, setPrompt] = useState('Covert it into reality!');
     const [tempPrompt, setTempPrompt] = useState('Convert it into reality!');
     const [isLoading, setIsLoading] = useState(false); // new state variable for loading status
-
     const handleSubmit = () => {
         setIsLoading(true); // set loading to true at the start of the effect
         axios.get(`http://localhost:4000/generate?prompt=${prompt}`)
