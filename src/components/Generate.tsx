@@ -111,7 +111,7 @@ const Generate = () => {
       const geometry = new THREE.BoxGeometry(size, size, size);
 
       // Create material
-      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Green color
+      const material = new THREE.MeshBasicMaterial({ color: 0xff0000 }); // Red color
 
       // Create mesh
       const cube = new THREE.Mesh(geometry, material);
@@ -128,7 +128,7 @@ const Generate = () => {
       const geometry = new THREE.BoxGeometry(width, height, depth);
 
       // Create material
-      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Green color
+    const material = new THREE.MeshBasicMaterial({ color: 0xff0000 }); // Red color
 
       // Create mesh
       const cuboid = new THREE.Mesh(geometry, material);
