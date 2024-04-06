@@ -8,10 +8,9 @@ const Hero = () => {
         {/*<div className="mt-5 flex flex-col items-center justify-center">*/}
         {/*  <div className="h-5 w-5 rounded-full bg-[#FF0000FF]" />*/}
         {/*  <div className="violet-gradient h-40 w-1 sm:h-80" />*/}
-        {/*</div>*/}
-        <div>
-          <h1 className={`${styles.heroHeadText} text-white`}>
-            <span className="text-[#FF0000FF]">{config.hero.name}</span>{' '}
+          <div>
+            <h1 className={`${styles.heroHeadText} text-white`}>
+              <span className="gradient-text">{config.hero.name}</span>{' '}
             <span className="relative">
               presents
               <div
@@ -22,7 +21,7 @@ const Hero = () => {
                   height: '5px',
                   width: '100%',
                   zIndex: -1,
-                  backgroundColor: '#00ffc3', // Change this to the color of your choice
+                  backgroundColor: '#FF0000FF', // Change this to the color of your choice
                 }}
               />
             </span>

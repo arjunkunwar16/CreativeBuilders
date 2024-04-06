@@ -46,7 +46,7 @@ export const config: TConfig = {
   },
   hero: {
     name: 'Creative Builders',
-    p: ['I develop 3D visuals, user', 'interfaces and web applications'],
+    p: ['Where Ideas Constructs Itself'],
   },
   contact: {
     p: 'Wanna be a Creative Builder ?',
