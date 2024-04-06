@@ -67,12 +67,23 @@ const Works = () => {
   return (
     <>
       <Header useMotion={true} {...config.sections.works} />
-
+      <div className="flex w-full justify-between items-center">
+  <motion.p
+    variants={fadeIn("", "", 0.1, 1)}
+    className="text-secondary mt-3 max-w-3xl text-[17px] leading-[30px]"
+  >
+    {config.sections.works.content}
+  </motion.p>
+  <button className="bg-red-500 hover:bg-red-900 text-white font-bold py-2 px-4 rounded shadow-lg" style={{ marginTop: '-170px' }}>
+  EXPLORE
+</button>
+</div>
       <div className="flex w-full">
         <motion.p
           variants={fadeIn("", "", 0.1, 1)}
           className="text-secondary mt-3 max-w-3xl text-[17px] leading-[30px]"
         >
+          
           {config.sections.works.content}
         </motion.p>
       </div>
