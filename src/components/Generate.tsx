@@ -142,8 +142,8 @@ const Generate = () => {
 
     function createLabel(text, x, y, z) {
       const canvas = document.createElement('canvas');
-      canvas.width = 100; // Increase the size of the canvas
-      canvas.height = 100;
+      canvas.width = 150; // Increase the size of the canvas
+      canvas.height = 150;
       const context = canvas.getContext('2d');
       context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
       context.font = '48px Arial'; // Increase the font size
