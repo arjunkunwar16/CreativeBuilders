@@ -15,7 +15,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/generate" element={<Generate />} />
+       <Route path="/generate" element={<Generate/>} />
         <Route
           path="/"
           element={

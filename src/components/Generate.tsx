@@ -27,7 +27,8 @@ const Generate = () => {
     };
 
     return (
-        <div className="bg-black text-white p-6 rounded-lg shadow-md max-w-md ml-4 mr-auto mt-40">
+       <div className='h-[100vh] bg-[url(/src/assets/herobg.png)] pt-40'>
+         <div className="bg-black text-white p-6 rounded-lg shadow-md max-w-md ml-4 mr-auto">
   <h1 className="text-3xl font-bold text-red-500 mb-4">Idea?</h1>
   <br />
   {isLoading ? (
@@ -55,7 +56,9 @@ const Generate = () => {
     Go to Home
   </a>
 </div>
+       </div>
     );
 };
 
 export default Generate;
+
