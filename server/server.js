@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 app.get('/generate', async (req, res) => {
    
     
-  let prompt = ' there is a prompt which will contain what the user wants in a room,also unless mentioned assume the room to be 5m x 4m dimentions now from that prompt you have to infer the objects and its possible placements in a room into a coordinates . Make all the generic assumntions about the room and the stuff. Only include Sofa, chair, table, Tv, plant and bed nothing else in the response. Example is Sofa : (x1,y1); Chair : (x2,y2); Table : (x3,y3); TV : (x4,y4); Plant : (x5,y5);Bed:(x6, y6) where x1..x6 and y1..y6 are the coordinates of the scene according to the prompt. Also assume that objects are not rotated and they are placed in the same direction as they are in the prompt.  Now the prompt in question is ->> ';
+  let prompt = '# Room Designer This prompt helps design a room layout by converting a simple description into coordinates. Predefined objects: TV, Plant, Sofa, Table, Chair, Bed. Please provide your room description. **Important: Follow the examples for proper formatting.** **Examples:** * "TV against the west wall, plant in the southeast corner." * "Sofa facing the TV in the center, table with two chairs to the right."  **Output Format:** ;Object1:(x1, y1);Object2:(x2,y2);... ';
   prompt += req.query.prompt;
   const result = await geminiModel.generateContent(prompt);
   const tosend = result.response.text();
