@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { config } from './constants/config';
 import Generate from './components/Generate.tsx';
 
+// Routing in App.js
 const App = () => {
   useEffect(() => {
     if (document.title !== config.html.title) {
